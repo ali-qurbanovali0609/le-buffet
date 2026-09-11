@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Buffet | Bistro · Wine · Coffee</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- COVER SCREEN -->
+    <div id="coverScreen" class="screen active">
+      <div class="cover-content">
+        <div class="cover-logo">Le Buffet</div>
+        <div class="cover-subtitle">BISTRO · WINE · COFFEE</div>
+        <div class="cover-tagline">Un coin de plaisir</div>
+        
+        <div class="language-selector">
+          <button class="lang-btn" data-lang="az">AZ</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+
+        <button class="btn-start" id="startBtn">
+          <span class="az-text">DAVAM ETMƏK ÜÇÜN TOXUNUN</span>
+          <span class="ru-text" style="display:none;">НАЖМИТЕ ДЛЯ ПРОДОЛЖЕНИЯ</span>
+          <span class="en-text" style="display:none;">TAP TO CONTINUE</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN MENU -->
+    <div id="mainScreen" class="screen">
+      <div class="header">
+        <h1>Le Buffet</h1>
+        <p class="subtitle-header">
+          <span class="az-text">Seçim edin</span>
+          <span class="ru-text" style="display:none;">Выберите раздел</span>
+          <span class="en-text" style="display:none;">Select section</span>
+        </p>
+      </div>
+
+      <div class="category-grid">
+        <div class="category-card" data-section="kitchen">
+          <div class="category-image kitchen-image"></div>
+          <div class="category-overlay">
+            <h2 class="az-text">MƏTBƏX</h2>
+            <h2 class="ru-text" style="display:none;">КУХНЯ</h2>
+            <h2 class="en-text" style="display:none;">KITCHEN</h2>
+          </div>
+        </div>
+
+        <div class="category-card" data-section="bar">
+          <div class="category-image bar-image"></div>
+          <div class="category-overlay">
+            <h2 class="az-text">BAR</h2>
+            <h2 class="ru-text" style="display:none;">БАР</h2>
+            <h2 class="en-text" style="display:none;">BAR</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CATEGORIES SCREEN -->
+    <div id="categoriesScreen" class="screen">
+      <div class="header">
+        <button class="btn-back" id="backBtn">← 
+          <span class="az-text">GERİ</span>
+          <span class="ru-text" style="display:none;">НАЗАД</span>
+          <span class="en-text" style="display:none;">BACK</span>
+        </button>
+        <h1 id="sectionTitle">MƏTBƏX</h1>
+      </div>
+
+      <div class="search-bar">
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="Axtarış..."
+          class="search-input"
+        >
+        <span class="search-icon">🔍</span>
+      </div>
+
+      <div class="categories-list" id="categoriesList"></div>
+    </div>
+
+    <!-- MENU ITEMS SCREEN -->
+    <div id="menuScreen" class="screen">
+      <div class="header">
+        <button class="btn-back" id="backFromMenuBtn">← 
+          <span class="az-text">GERİ</span>
+          <span class="ru-text" style="display:none;">НАЗАД</span>
+          <span class="en-text" style="display:none;">BACK</span>
+        </button>
+        <h1 id="categoryTitle">Salatlar</h1>
+      </div>
+
+      <div class="search-bar">
+        <input 
+          type="text" 
+          id="searchInputMenu" 
+          placeholder="Axtarış..."
+          class="search-input"
+        >
+        <span class="search-icon">🔍</span>
+      </div>
+
+      <div class="dishes-grid" id="dishesGrid"></div>
+    </div>
+
+    <!-- DISH DETAIL MODAL -->
+    <div id="dishModal" class="modal">
+      <div class="modal-content">
+        <button class="modal-close">✕</button>
+        
+        <div class="dish-image-container">
+          <img id="dishImage" src="" alt="Dish" class="dish-image">
+        </div>
+
+        <div class="dish-info">
+          <h2 id="dishName"></h2>
+          
+          <div class="dish-tags" id="dishTags"></div>
+
+          <p id="dishIngredients" class="dish-ingredients"></p>
+
+          <div class="dish-meta">
+            <span class="cooking-time">
+              <span class="icon">⏱</span>
+              <span id="dishTime"></span>
+              <span class="az-text">dəq</span>
+              <span class="ru-text" style="display:none;">мин</span>
+              <span class="en-text" style="display:none;">min</span>
+            </span>
+            <span class="price" id="dishPrice"></span>
+          </div>
+
+          <button class="btn-add-to-cart" id="addToCartBtn">
+            <span class="az-text">SƏBƏTƏ ƏLAVƏ ET</span>
+            <span class="ru-text" style="display:none;">ДОБАВИТЬ В КОРЗИНУ</span>
+            <span class="en-text" style="display:none;">ADD TO CART</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
