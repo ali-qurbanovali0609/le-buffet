@@ -1,2093 +1,631 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-<title>Le Buffet — Bistro · Wine · Coffee</title>
-
-<style>
-:root{
-    --cream:#f5ead7;
-    --cream2:#fff8ec;
-    --brown:#3b2418;
-    --brown2:#5c3927;
-    --gold:#c99b50;
-    --gold2:#e6c47d;
-    --dark:#18100c;
-    --glass:rgba(45,25,16,.72);
-    --border:rgba(255,220,160,.25);
-    --shadow:0 15px 50px rgba(0,0,0,.25);
-}
-
-*{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-}
-
-html,
-body{
-    margin:0;
-    width:100%;
-    min-height:100%;
-    background:#17100c;
-    color:var(--cream);
-    font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
-    overflow-x:hidden;
-}
-
-button{
-    font:inherit;
-}
-
-#app{
-    width:100%;
-    min-height:100dvh;
-}
-
-.screen{
-    width:100%;
-    min-height:100dvh;
-}
-
-/* =========================================================
-   COVER
-========================================================= */
-
-.cover{
-    position:relative;
-    width:100%;
-    height:100dvh;
-    min-height:600px;
-    overflow:hidden;
-    background:#120b08;
-}
-
-.cover-photo{
-    position:absolute;
-    inset:0;
-    background-image:url("cover.jpg");
-    background-position:center center;
-    background-size:cover;
-    background-repeat:no-repeat;
-}
-
-.cover-photo::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,.05) 0%,
-            rgba(0,0,0,.04) 48%,
-            rgba(0,0,0,.18) 68%,
-            rgba(0,0,0,.35) 100%
-        );
-}
-
-/*
-   Real HTML controls are placed over the language selector
-   drawn inside the photograph.
-*/
-
-.cover-controls{
-    position:absolute;
-    inset:0;
-    z-index:10;
-    pointer-events:none;
-}
-
-/* Language selector */
-
-.language-switcher{
-    position:absolute;
-
-    /*
-       If your original photo has the selector slightly higher/lower,
-       only change this value.
-    */
-    top:69.8%;
-    left:50%;
-
-    transform:translateX(-50%);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:5px;
-
-    padding:5px;
-
-    min-width:160px;
-    height:47px;
-
-    border-radius:100px;
-
-    background:rgba(35,18,10,.78);
-    border:1px solid rgba(255,225,165,.38);
-
-    box-shadow:
-        0 8px 28px rgba(0,0,0,.35),
-        inset 0 1px 0 rgba(255,255,255,.12);
-
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
-
-    pointer-events:auto;
-}
-
-.cover-language{
-    width:46px;
-    height:35px;
-
-    border:0;
-    border-radius:100px;
-
-    background:transparent;
-
-    color:#ead9bd;
-
-    font-size:11px;
-    font-weight:800;
-    letter-spacing:1px;
-
-    cursor:pointer;
-
-    transition:
-        background .22s ease,
-        color .22s ease,
-        transform .12s ease,
-        box-shadow .22s ease;
-}
-
-.cover-language.active{
-    background:linear-gradient(
-        135deg,
-        #f4d889,
-        #b8792e
-    );
-
-    color:#29160c;
-
-    box-shadow:
-        0 4px 16px rgba(220,176,83,.42),
-        inset 0 1px 0 rgba(255,255,255,.45);
-}
-
-.cover-language:active{
-    transform:scale(.91);
-}
-
-/* Continue button */
-
-.cover-continue{
-    position:absolute;
-
-    left:14%;
-    right:14%;
-    bottom:7.2%;
-
-    height:70px;
-
-    border:1px solid rgba(255,230,180,.18);
-    border-radius:100px;
-
-    background:rgba(35,18,10,.22);
-
-    color:#fff5df;
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:15px;
-    font-weight:600;
-    letter-spacing:1.8px;
-
-    text-shadow:0 2px 5px rgba(0,0,0,.7);
-
-    cursor:pointer;
-
-    pointer-events:auto;
-
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);
-
-    transition:.25s ease;
-}
-
-.cover-continue:active{
-    transform:scale(.97);
-    background:rgba(35,18,10,.4);
-}
-
-/* =========================================================
-   CHOICE
-========================================================= */
-
-.choice{
-    position:relative;
-    min-height:100dvh;
-    padding:25px 18px 35px;
-
-    background:
-        radial-gradient(
-            circle at 20% 10%,
-            rgba(201,155,80,.14),
-            transparent 30%
-        ),
-        linear-gradient(
-            145deg,
-            #24150e,
-            #100a07
-        );
-}
-
-.choice-header{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    max-width:700px;
-    margin:0 auto 35px;
-}
-
-.brand-mini{
-    font-family:Georgia,"Times New Roman",serif;
-    color:var(--gold2);
-    font-size:25px;
-    letter-spacing:1px;
-}
-
-.back-btn{
-    border:1px solid var(--border);
-    background:rgba(255,255,255,.06);
-    color:var(--cream);
-    border-radius:50px;
-    padding:10px 16px;
-    cursor:pointer;
-}
-
-.choice-title{
-    max-width:700px;
-    margin:0 auto 30px;
-    text-align:center;
-}
-
-.choice-title h1{
-    margin:0 0 10px;
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:35px;
-    font-weight:500;
-
-    color:#f8e6c3;
-}
-
-.choice-title p{
-    margin:0;
-    color:#cdbb9e;
-    font-size:14px;
-}
-
-.choice-grid{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:18px;
-
-    max-width:700px;
-    margin:auto;
-}
-
-.choice-card{
-    position:relative;
-    min-height:230px;
-
-    padding:28px;
-
-    border:1px solid var(--border);
-    border-radius:28px;
-
-    overflow:hidden;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.13),
-            rgba(255,255,255,.035)
-        );
-
-    box-shadow:var(--shadow);
-
-    cursor:pointer;
-
-    transition:.25s ease;
-
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
-}
-
-.choice-card:active{
-    transform:scale(.98);
-}
-
-.choice-card::after{
-    content:"";
-    position:absolute;
-    inset:0;
-
-    background:
-        radial-gradient(
-            circle at 80% 20%,
-            rgba(230,196,125,.2),
-            transparent 35%
-        );
-
-    pointer-events:none;
-}
-
-.choice-icon{
-    font-size:43px;
-    margin-bottom:20px;
-}
-
-.choice-card h2{
-    position:relative;
-    z-index:1;
-
-    margin:0 0 9px;
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:27px;
-    font-weight:500;
-
-    color:#f6dfb4;
-}
-
-.choice-card p{
-    position:relative;
-    z-index:1;
-
-    margin:0;
-
-    color:#cdbda6;
-    font-size:14px;
-    line-height:1.5;
-}
-
-/* =========================================================
-   MENU
-========================================================= */
-
-.menu-screen{
-    min-height:100dvh;
-    background:
-        radial-gradient(
-            circle at 80% 0%,
-            rgba(201,155,80,.13),
-            transparent 30%
-        ),
-        var(--cream);
-
-    color:var(--brown);
-
-    padding-bottom:50px;
-}
-
-.menu-top{
-    position:sticky;
-    top:0;
-    z-index:30;
-
-    padding:15px 16px 13px;
-
-    background:rgba(245,234,215,.9);
-
-    border-bottom:1px solid rgba(60,35,20,.12);
-
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-}
-
-.menu-top-inner{
-    max-width:900px;
-    margin:auto;
-}
-
-.menu-top-row{
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.menu-back{
-    width:43px;
-    height:43px;
-
-    flex:none;
-
-    border:1px solid rgba(60,35,20,.18);
-    border-radius:50%;
-
-    background:rgba(255,255,255,.45);
-
-    color:var(--brown);
-
-    cursor:pointer;
-}
-
-.menu-brand{
-    flex:1;
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:24px;
-    color:var(--brown);
-}
-
-.menu-type{
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:1.5px;
-    color:#947143;
-}
-
-.search{
-    width:100%;
-    margin-top:12px;
-
-    height:45px;
-
-    border:1px solid rgba(60,35,20,.14);
-    border-radius:50px;
-
-    padding:0 18px;
-
-    outline:none;
-
-    background:rgba(255,255,255,.6);
-
-    color:var(--brown);
-
-    font-size:14px;
-}
-
-.search::placeholder{
-    color:#967e67;
-}
-
-.categories{
-    display:flex;
-    gap:8px;
-
-    overflow-x:auto;
-
-    padding:13px 16px 5px;
-
-    scrollbar-width:none;
-}
-
-.categories::-webkit-scrollbar{
-    display:none;
-}
-
-.category{
-    flex:none;
-
-    border:1px solid rgba(60,35,20,.17);
-
-    border-radius:100px;
-
-    padding:9px 14px;
-
-    background:rgba(255,255,255,.42);
-
-    color:#684a36;
-
-    font-size:12px;
-    font-weight:700;
-
-    cursor:pointer;
-
-    transition:.2s ease;
-}
-
-.category.active{
-    background:var(--brown);
-    color:#f8e8cf;
-    border-color:var(--brown);
-}
-
-.menu-content{
-    max-width:900px;
-    margin:auto;
-
-    padding:18px 16px 30px;
-}
-
-.section-title{
-    margin:5px 0 15px;
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:28px;
-    font-weight:500;
-
-    color:var(--brown);
-}
-
-.dishes{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:14px;
-}
-
-.dish{
-    display:grid;
-    grid-template-columns:105px 1fr;
-
-    min-height:120px;
-
-    border-radius:22px;
-
-    overflow:hidden;
-
-    background:rgba(255,255,255,.68);
-
-    border:1px solid rgba(70,40,20,.1);
-
-    box-shadow:
-        0 8px 25px rgba(60,35,20,.08);
-
-    cursor:pointer;
-
-    transition:.22s ease;
-}
-
-.dish:active{
-    transform:scale(.985);
-}
-
-.dish-image{
-    width:105px;
-    height:100%;
-
-    min-height:120px;
-
-    background-size:cover;
-    background-position:center;
-}
-
-.dish-info{
-    padding:14px 13px;
-}
-
-.dish-name{
-    margin:0 0 6px;
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:18px;
-    line-height:1.15;
-
-    color:var(--brown);
-}
-
-.dish-desc{
-    margin:0 0 9px;
-
-    color:#765d48;
-
-    font-size:12px;
-    line-height:1.4;
-
-    display:-webkit-box;
-    -webkit-line-clamp:2;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
-}
-
-.dish-bottom{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-}
-
-.price{
-    font-weight:800;
-    color:#9b6925;
-}
-
-.tags{
-    display:flex;
-    gap:4px;
-    flex-wrap:wrap;
-}
-
-.tag{
-    padding:4px 7px;
-
-    border-radius:50px;
-
-    background:#eee0c8;
-
-    color:#745337;
-
-    font-size:9px;
-    font-weight:700;
-}
-
-/* =========================================================
-   MODAL
-========================================================= */
-
-.modal{
-    position:fixed;
-    inset:0;
-    z-index:100;
-
-    display:none;
-    align-items:flex-end;
-
-    background:rgba(12,7,4,.65);
-
-    backdrop-filter:blur(8px);
-    -webkit-backdrop-filter:blur(8px);
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-card{
-    width:100%;
-    max-height:92dvh;
-
-    overflow-y:auto;
-
-    border-radius:30px 30px 0 0;
-
-    background:#fff8ec;
-
-    color:var(--brown);
-
-    animation:modalUp .25s ease;
-}
-
-@keyframes modalUp{
-    from{
-        transform:translateY(30px);
-        opacity:0;
-    }
-    to{
-        transform:translateY(0);
-        opacity:1;
-    }
-}
-
-.modal-image{
-    width:100%;
-    height:260px;
-
-    background-size:cover;
-    background-position:center;
-
-    position:relative;
-}
-
-.modal-close{
-    position:absolute;
-    top:15px;
-    right:15px;
-
-    width:42px;
-    height:42px;
-
-    border:1px solid rgba(255,255,255,.45);
-    border-radius:50%;
-
-    background:rgba(20,10,5,.55);
-
-    color:#fff;
-
-    font-size:20px;
-
-    cursor:pointer;
-
-    backdrop-filter:blur(10px);
-}
-
-.modal-body{
-    padding:23px 20px 30px;
-}
-
-.modal-title{
-    margin:0 0 10px;
-
-    font-family:Georgia,"Times New Roman",serif;
-    font-size:29px;
-    font-weight:500;
-}
-
-.modal-price{
-    font-size:21px;
-    font-weight:800;
-    color:#a06e28;
-
-    margin-bottom:18px;
-}
-
-.modal-description{
-    font-size:14px;
-    line-height:1.6;
-    color:#705743;
-}
-
-.modal-meta{
-    margin-top:20px;
-
-    padding:14px;
-
-    border-radius:16px;
-
-    background:#f0e1c8;
-
-    font-size:12px;
-    line-height:1.6;
-}
-
-/* =========================================================
-   EMPTY
-========================================================= */
-
-.empty{
-    text-align:center;
-    padding:50px 20px;
-
-    color:#806b57;
-}
-
-.empty-icon{
-    font-size:38px;
-    margin-bottom:10px;
-}
-
-/* =========================================================
-   DESKTOP
-========================================================= */
-
-@media(min-width:700px){
-
-    .choice-grid{
-        grid-template-columns:1fr 1fr;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Le Buffet Menu</title>
+  
+  <!-- PWA Manifest Integration -->
+  <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIkxlIEJ1ZmZldCBNZW51IiwKICAic2hvcnRfbmFtZSI6ICJMZSBCdWZmZXQiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2ZlZmNmNiIsCiAgInRoZW1lX2NvbG9yIjogIiMwZDFhOGEiCn0=" />
+  <meta name="theme-color" content="#0d1a8a">
+  <link rel="apple-touch-icon" href="images/logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #fefcf6;
+      --primary-color: #0d1a8a;
+      --accent-gold: #d4af37;
+      --font-logo: 'Great Vibes', cursive;
+      --font-main: 'Inter', sans-serif;
     }
 
-    .dishes{
-        grid-template-columns:1fr 1fr;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .dish{
-        grid-template-columns:120px 1fr;
+    body {
+      background-color: var(--bg-color);
+      color: #333;
+      font-family: var(--font-main);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    .dish-image{
-        width:120px;
+    .app-container {
+      width: 100%;
+      max-width: 430px;
+      min-height: 100vh;
+      position: relative;
+      background: #000;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
     }
 
-    .modal{
-        align-items:center;
-        justify-content:center;
+    .screen {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      display: none;
+      flex-direction: column;
+      z-index: 1;
+      background-size: cover;
+      background-position: center;
     }
 
-    .modal-card{
-        width:min(600px,94vw);
-        border-radius:30px;
-        max-height:90vh;
+    .screen.active {
+      display: flex;
+      z-index: 2;
     }
-}
-</style>
+
+    .glass-panel {
+      background: rgba(20, 20, 20, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      color: #fff;
+    }
+
+    #splash-screen {
+      background-image: url('673.png');
+      cursor: pointer;
+    }
+    .splash-content {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 50px 24px 40px;
+    }
+    .lang-switcher-splash {
+      align-self: flex-end;
+      display: flex;
+      gap: 12px;
+      background: rgba(0,0,0,0.4);
+      padding: 6px 16px;
+      border-radius: 20px;
+      backdrop-filter: blur(8px);
+    }
+    .lang-btn {
+      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      font-weight: 500;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+    .lang-btn.active {
+      color: #fff;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    #choice-screen {
+      background-image: url('674.png');
+      position: relative;
+      cursor: pointer;
+    }
+    .choice-overlay-btn {
+      position: absolute;
+      left: 8%; width: 84%;
+      height: 18%;
+      opacity: 0;
+      cursor: pointer;
+    }
+    #btn-kitchen { top: 28%; }
+    #btn-bar { top: 52%; }
+
+    #menu-screen {
+      background: #0d0d0d;
+      color: #fff;
+      position: relative;
+      overflow-y: auto;
+    }
+    #menu-screen::before {
+      content: '';
+      position: fixed;
+      top:0; left:0; width:100%; height:100%;
+      background-image: url('674.png');
+      background-size: cover;
+      opacity: 0.15;
+      filter: blur(10px);
+      pointer-events: none;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(13, 13, 13, 0.85);
+      backdrop-filter: blur(12px);
+      padding: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .back-btn {
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .cart-icon-btn {
+      position: relative;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .cart-badge {
+      position: absolute;
+      top: -4px; right: -4px;
+      background: #e74c3c;
+      color: #fff;
+      font-size: 10px;
+      font-weight: bold;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .search-box {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 10px 16px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .categories-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 12px 16px;
+      scrollbar-width: none;
+    }
+    .categories-scroll::-webkit-scrollbar { display: none; }
+    .cat-chip {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 20px;
+      font-size: 13px;
+      white-space: nowrap;
+      cursor: pointer;
+      color: rgba(255,255,255,0.7);
+    }
+    .cat-chip.active {
+      background: var(--accent-gold);
+      color: #000;
+      font-weight: 600;
+    }
+
+    .menu-items-list {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-bottom: 80px;
+    }
+
+    .food-card {
+      display: flex;
+      gap: 12px;
+      padding: 12px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .food-card:active { transform: scale(0.98); }
+    .food-img {
+      width: 80px; height: 80px;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    .food-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .food-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .food-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+    .food-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .food-price {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--accent-gold);
+    }
+    .food-time {
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .modal {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      display: none;
+      justify-content: flex-end;
+      flex-direction: column;
+    }
+    .modal.active { display: flex; }
+    .modal-content {
+      background: #181818;
+      border-radius: 24px 24px 0 0;
+      padding: 20px;
+      max-height: 85vh;
+      overflow-y: auto;
+      color: #fff;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .modal-img {
+      width: 100%;
+      height: 220px;
+      border-radius: 16px;
+      object-fit: cover;
+      margin-bottom: 16px;
+    }
+    .add-cart-btn {
+      width: 100%;
+      background: var(--accent-gold);
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 15px;
+      margin-top: 16px;
+      cursor: pointer;
+    }
+
+    .service-footer {
+      position: fixed;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      background: rgba(13, 13, 13, 0.9);
+      text-align: center;
+      padding: 8px;
+      font-size: 11px;
+      color: var(--accent-gold);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      z-index: 5;
+    }
+  </style>
 </head>
-
 <body>
 
-<div id="app"></div>
+<div class="app-container">
+  <div id="splash-screen" class="screen active">
+    <div class="splash-content">
+      <div class="lang-switcher-splash" id="splash-lang-box">
+        <button class="lang-btn active" data-lang="az">AZ</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="choice-screen" class="screen">
+    <div class="choice-overlay-btn" id="btn-kitchen"></div>
+    <div class="choice-overlay-btn" id="btn-bar"></div>
+  </div>
+
+  <div id="menu-screen" class="screen">
+    <div class="header">
+      <div class="nav-bar">
+        <button class="back-btn" id="btn-back">← Back</button>
+        <div class="lang-switcher-splash" id="menu-lang-box">
+          <button class="lang-btn" data-lang="az">AZ</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+        <button class="cart-icon-btn" id="btn-cart-toggle">
+          🛒 <span class="cart-badge" id="cart-count">0</span>
+        </button>
+      </div>
+      <input type="text" class="search-box" id="search-input" placeholder="Menyuda axtar...">
+    </div>
+
+    <div class="categories-scroll" id="categories-container"></div>
+    <div class="menu-items-list" id="menu-container"></div>
+    <div class="service-footer">SERVİS HAQQI 10%</div>
+  </div>
+</div>
+
+<div class="modal" id="dish-modal">
+  <div class="modal-content glass-panel" id="modal-body"></div>
+</div>
+
+<div class="modal" id="cart-modal">
+  <div class="modal-content glass-panel">
+    <h2 style="margin-bottom: 16px;">Səbət</h2>
+    <div id="cart-items"></div>
+    <hr style="margin: 16px 0; border-color: rgba(255,255,255,0.1);">
+    <div style="display:flex; justify-content:space-between; margin-bottom: 8px;">
+      <span>Məbləğ:</span>
+      <span id="cart-subtotal">0.00 ₼</span>
+    </div>
+    <div style="display:flex; justify-content:space-between; color: var(--accent-gold); margin-bottom: 16px;">
+      <span>Servis haqqı (10%):</span>
+      <span id="cart-service">0.00 ₼</span>
+    </div>
+    <div style="display:flex; justify-content:space-between; font-weight:bold; font-size: 18px; margin-bottom: 16px;">
+      <span>Cəmi:</span>
+      <span id="cart-total">0.00 ₼</span>
+    </div>
+    <button class="add-cart-btn" id="btn-confirm-order">Sifarişi təsdiqlə</button>
+    <button class="back-btn" style="width:100%; margin-top: 8px;" id="btn-close-cart">Bağla</button>
+  </div>
+</div>
 
 <script>
+  let currentLang = 'az';
+  let currentType = 'kitchen';
+  let currentCategory = 'all';
+  const cart = [];
 
-/* =========================================================
-   TRANSLATIONS
-========================================================= */
-
-const TEXT = {
-
-    az:{
-        continue:"DAVAM ETMƏK ÜÇÜN TOXUNUN",
-
-        choiceTitle:"Le Buffet",
-        choiceSubtitle:"Mətbəx və bar dünyamıza xoş gəlmisiniz",
-
-        kitchen:"MƏTBƏX",
-        kitchenSub:"Ləzzətin Ünvanı",
-
-        bar:"BAR",
-        barSub:"Qədəhdəki Hekayə",
-
-        back:"GERİ",
-        search:"Yemək və ya inqrediyent axtar...",
-        all:"HAMISI",
-
-        salads:"Salatlar",
-        soups:"Şorbalar",
-        breakfasts:"Səhər yeməkləri",
-        appetizers:"Soyuq qəlyanaltılar",
-        crepes:"Blinçiklər / Kreplər",
-        mains:"Əsas yeməklər",
-        pizzas:"Pizzalar / Kişlər",
-        sandwiches:"Sendviçlər",
-
-        juices:"Şirələr / Limonadlar",
-        cocktails:"Kokteyllər",
-        wines:"Şərablar",
-        teaCoffee:"Çay / Qəhvə",
-
-        kitchenTitle:"Mətbəx",
-        barTitle:"Bar",
-
-        ingredients:"İnqrediyentlər",
-        prep:"Hazırlanma vaxtı",
-        service:"Servis haqqı",
-        chef:"Şefin seçimi",
-        vegetarian:"Vegetarian",
-        popular:"Populyar",
-
-        noResults:"Heç bir nəticə tapılmadı",
-        minutes:"dəq.",
-        close:"Bağla"
+  const menu = [
+    {
+      id: 1, type: "kitchen", category: "salads",
+      name: { az: "Klassik Sezar salatı", ru: "Классический салат Цезарь", en: "Classic Caesar Salad" },
+      ingredients: { az: "Toyuq filesi, romaine salatı, karaviz, parmesan pendiri...", ru: "Куриное филе, салат ромэн, сельдерей, пармезан...", en: "Chicken fillet, romaine, celery, parmesan..." },
+      price: 14.90, time: 15, image: "675.png", tags: ["popular", "chef"]
     },
-
-    ru:{
-        continue:"КОСНИТЕСЬ, ЧТОБЫ ПРОДОЛЖИТЬ",
-
-        choiceTitle:"Le Buffet",
-        choiceSubtitle:"Добро пожаловать в мир нашей кухни и бара",
-
-        kitchen:"МЕНЮ",
-        kitchenSub:"С пылу, с жару",
-
-        bar:"БАР",
-        barSub:"Здесь наливают счастье",
-
-        back:"НАЗАД",
-        search:"Поиск блюда или ингредиента...",
-        all:"ВСЁ",
-
-        salads:"Салаты",
-        soups:"Супы",
-        breakfasts:"Завтраки",
-        appetizers:"Холодные закуски",
-        crepes:"Блины / Крепы",
-        mains:"Основные блюда",
-        pizzas:"Пиццы / Киши",
-        sandwiches:"Сэндвичи",
-
-        juices:"Соки / Лимонады",
-        cocktails:"Коктейли",
-        wines:"Вина",
-        teaCoffee:"Чай / Кофе",
-
-        kitchenTitle:"Кухня",
-        barTitle:"Бар",
-
-        ingredients:"Ингредиенты",
-        prep:"Время приготовления",
-        service:"Сервисный сбор",
-        chef:"Выбор шефа",
-        vegetarian:"Вегетарианское",
-        popular:"Популярное",
-
-        noResults:"Ничего не найдено",
-        minutes:"мин.",
-        close:"Закрыть"
+    {
+      id: 2, type: "kitchen", category: "salads",
+      name: { az: "Karidesli salat", ru: "Салат с креветками", en: "Shrimp Salad" },
+      ingredients: { az: "Karides, karaviz, avokado, xüsusi sous", ru: "Креветки, сельдерей, авокадо, фирменный соус", en: "Shrimp, celery, avocado, special sauce" },
+      price: 18.50, time: 12, image: "683.png", tags: ["chef"]
     },
-
-    en:{
-        continue:"TAP TO CONTINUE",
-
-        choiceTitle:"Le Buffet",
-        choiceSubtitle:"Welcome to our kitchen and bar",
-
-        kitchen:"KITCHEN",
-        kitchenSub:"From Fire to Table",
-
-        bar:"BAR",
-        barSub:"Sip the Story",
-
-        back:"BACK",
-        search:"Search dish or ingredient...",
-        all:"ALL",
-
-        salads:"Salads",
-        soups:"Soups",
-        breakfasts:"Breakfast",
-        appetizers:"Cold Starters",
-        crepes:"Crepes",
-        mains:"Main Courses",
-        pizzas:"Pizzas / Quiches",
-        sandwiches:"Sandwiches",
-
-        juices:"Juices / Lemonades",
-        cocktails:"Cocktails",
-        wines:"Wines",
-        teaCoffee:"Tea / Coffee",
-
-        kitchenTitle:"Kitchen",
-        barTitle:"Bar",
-
-        ingredients:"Ingredients",
-        prep:"Preparation time",
-        service:"Service charge",
-        chef:"Chef's choice",
-        vegetarian:"Vegetarian",
-        popular:"Popular",
-
-        noResults:"No results found",
-        minutes:"min.",
-        close:"Close"
+    {
+      id: 3, type: "kitchen", category: "soups",
+      name: { az: "Karəviz şorbası", ru: "Суп из сельдерея", en: "Celery Soup" },
+      ingredients: { az: "Tərəvəz, karəviz, krema", ru: "Овощи, сельдерей, сливки", en: "Vegetables, celery, cream" },
+      price: 7.50, time: 20, image: "683.png", tags: ["popular"]
+    },
+    {
+      id: 4, type: "bar", category: "cocktails",
+      name: { az: "Aperol Spritz", ru: "Апероль Спритц", en: "Aperol Spritz" },
+      ingredients: { az: "Aperol, prosecco, portağal", ru: "Апероль, просекко, апельсин", en: "Aperol, prosecco, orange" },
+      price: 14.90, time: 5, image: "677.png", tags: ["popular"]
+    },
+    {
+      id: 5, type: "bar", category: "cocktails",
+      name: { az: "Mojito", ru: "Мохито", en: "Mojito" },
+      ingredients: { az: "Rom, ahəng, nanə", ru: "Ром, лайм, мята", en: "Rum, lime, mint" },
+      price: 12.90, time: 5, image: "676.png", tags: []
     }
-};
-
-
-/* =========================================================
-   STATE
-========================================================= */
-
-let language =
-    localStorage.getItem("leBuffetLanguage") || "az";
-
-let screen = "cover";
-
-let currentType = "kitchen";
-
-let currentCategory = "all";
-
-let searchQuery = "";
-
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-function t(){
-
-    return TEXT[language] || TEXT.az;
-
-}
-
-
-function escapeHTML(value){
-
-    return String(value)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================================================
-   IMAGES
-========================================================= */
-
-const IMAGES = {
-
-    salad:
-    "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=85",
-
-    soup:
-    "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85",
-
-    breakfast:
-    "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=900&q=85",
-
-    appetizer:
-    "https://images.unsplash.com/photo-1541014741259-de529411b96a?auto=format&fit=crop&w=900&q=85",
-
-    crepe:
-    "https://images.unsplash.com/photo-1519671282424-9f1b5d9d8b5b?auto=format&fit=crop&w=900&q=85",
-
-    main:
-    "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85",
-
-    pizza:
-    "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=85",
-
-    sandwich:
-    "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=900&q=85",
-
-    juice:
-    "https://images.unsplash.com/photo-1546173159-315724a31696?auto=format&fit=crop&w=900&q=85",
-
-    cocktail:
-    "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=85",
-
-    wine:
-    "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=900&q=85",
-
-    coffee:
-    "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85"
-};
-
-
-/* =========================================================
-   MENU DATABASE
-========================================================= */
-
-const MENU = [
-
-    /* ================= KITCHEN ================= */
-
-    {
-        type:"kitchen",
-        category:"salads",
-        image:IMAGES.salad,
-
-        name:{
-            az:"Nicoise Salatı",
-            ru:"Салат Нисуаз",
-            en:"Nicoise Salad"
-        },
-
-        desc:{
-            az:"Təzə tərəvəzlər, ton balığı, yumurta və zeytun.",
-            ru:"Свежие овощи, тунец, яйцо и оливки.",
-            en:"Fresh vegetables, tuna, egg and olives."
-        },
-
-        ingredients:{
-            az:"Ton balığı, pomidor, yumurta, zeytun, yaşıl lobya, kahı, zeytun yağı.",
-            ru:"Тунец, помидоры, яйцо, оливки, зелёная фасоль, салат, оливковое масло.",
-            en:"Tuna, tomatoes, egg, olives, green beans, lettuce, olive oil."
-        },
-
-        price:18,
-        prep:10,
-        tags:["popular"]
-    },
-
-    {
-        type:"kitchen",
-        category:"soups",
-        image:IMAGES.soup,
-
-        name:{
-            az:"Fransız Soğan Şorbası",
-            ru:"Французский луковый суп",
-            en:"French Onion Soup"
-        },
-
-        desc:{
-            az:"Karamelləşdirilmiş soğan, ətirli bulyon və pendir.",
-            ru:"Карамелизированный лук, ароматный бульон и сыр.",
-            en:"Caramelized onions, rich broth and cheese."
-        },
-
-        ingredients:{
-            az:"Soğan, mal əti bulyonu, kərə yağı, baget, Gruyère pendiri.",
-            ru:"Лук, говяжий бульон, сливочное масло, багет, сыр Gruyère.",
-            en:"Onion, beef broth, butter, baguette, Gruyère cheese."
-        },
-
-        price:12,
-        prep:20,
-        tags:["chef"]
-    },
-
-    {
-        type:"kitchen",
-        category:"breakfasts",
-        image:IMAGES.breakfast,
-
-        name:{
-            az:"Fransız Səhər Yeməyi",
-            ru:"Французский завтрак",
-            en:"French Breakfast"
-        },
-
-        desc:{
-            az:"Kruassan, yumurta, pendir, yağ və mürəbbə.",
-            ru:"Круассан, яйца, сыр, масло и джем.",
-            en:"Croissant, eggs, cheese, butter and jam."
-        },
-
-        ingredients:{
-            az:"Kruassan, yumurta, pendir, kərə yağı, ev mürəbbəsi.",
-            ru:"Круассан, яйца, сыр, сливочное масло, домашний джем.",
-            en:"Croissant, eggs, cheese, butter, homemade jam."
-        },
-
-        price:16,
-        prep:12,
-        tags:["popular"]
-    },
-
-    {
-        type:"kitchen",
-        category:"appetizers",
-        image:IMAGES.appetizer,
-
-        name:{
-            az:"Pendir Assorti",
-            ru:"Сырное ассорти",
-            en:"Cheese Selection"
-        },
-
-        desc:{
-            az:"Seçilmiş pendirlər, qoz, üzüm və bal.",
-            ru:"Отборные сыры, орехи, виноград и мёд.",
-            en:"Selected cheeses, nuts, grapes and honey."
-        },
-
-        ingredients:{
-            az:"Brie, Camembert, Gouda, qoz, üzüm, bal.",
-            ru:"Brie, Camembert, Gouda, орехи, виноград, мёд.",
-            en:"Brie, Camembert, Gouda, nuts, grapes, honey."
-        },
-
-        price:24,
-        prep:8,
-        tags:["vegetarian"]
-    },
-
-    {
-        type:"kitchen",
-        category:"crepes",
-        image:IMAGES.crepe,
-
-        name:{
-            az:"Nutella və Çiyələkli Krep",
-            ru:"Креп с Nutella и клубникой",
-            en:"Nutella Strawberry Crepe"
-        },
-
-        desc:{
-            az:"Nazik fransız krep, Nutella və təzə çiyələk.",
-            ru:"Тонкий французский креп, Nutella и свежая клубника.",
-            en:"Thin French crepe with Nutella and fresh strawberries."
-        },
-
-        ingredients:{
-            az:"Un, süd, yumurta, Nutella, çiyələk.",
-            ru:"Мука, молоко, яйца, Nutella, клубника.",
-            en:"Flour, milk, eggs, Nutella, strawberries."
-        },
-
-        price:13,
-        prep:10,
-        tags:["popular"]
-    },
-
-    {
-        type:"kitchen",
-        category:"mains",
-        image:IMAGES.main,
-
-        name:{
-            az:"Steak Frites",
-            ru:"Стейк с картофелем",
-            en:"Steak Frites"
-        },
-
-        desc:{
-            az:"Qrildə bişmiş mal əti və xırtıldayan kartof.",
-            ru:"Говяжий стейк на гриле и хрустящий картофель.",
-            en:"Grilled beef steak with crispy fries."
-        },
-
-        ingredients:{
-            az:"Mal əti, kartof, kərə yağı, rozmarin, sarımsaq.",
-            ru:"Говядина, картофель, сливочное масло, розмарин, чеснок.",
-            en:"Beef, potatoes, butter, rosemary, garlic."
-        },
-
-        price:32,
-        prep:25,
-        tags:["chef","popular"]
-    },
-
-    {
-        type:"kitchen",
-        category:"pizzas",
-        image:IMAGES.pizza,
-
-        name:{
-            az:"Truffle Quiche",
-            ru:"Трюфельный киш",
-            en:"Truffle Quiche"
-        },
-
-        desc:{
-            az:"Fransız kiş, göbələk, qaymaq və trüfel yağı.",
-            ru:"Французский киш с грибами, сливками и трюфельным маслом.",
-            en:"French quiche with mushrooms, cream and truffle oil."
-        },
-
-        ingredients:{
-            az:"Xəmir, göbələk, yumurta, qaymaq, pendir, trüfel yağı.",
-            ru:"Тесто, грибы, яйца, сливки, сыр, трюфельное масло.",
-            en:"Pastry, mushrooms, eggs, cream, cheese, truffle oil."
-        },
-
-        price:19,
-        prep:22,
-        tags:["chef","vegetarian"]
-    },
-
-    {
-        type:"kitchen",
-        category:"sandwiches",
-        image:IMAGES.sandwich,
-
-        name:{
-            az:"Croque Monsieur",
-            ru:"Крок-месье",
-            en:"Croque Monsieur"
-        },
-
-        desc:{
-            az:"Qızardılmış brioche, vetçina, pendir və beşamel.",
-            ru:"Поджаренный бриошь, ветчина, сыр и бешамель.",
-            en:"Toasted brioche, ham, cheese and béchamel."
-        },
-
-        ingredients:{
-            az:"Brioche, vetçina, Gruyère, beşamel sousu.",
-            ru:"Бриошь, ветчина, Gruyère, соус бешамель.",
-            en:"Brioche, ham, Gruyère, béchamel sauce."
-        },
-
-        price:17,
-        prep:12,
-        tags:["popular"]
-    },
-
-
-    /* ================= BAR ================= */
-
-    {
-        type:"bar",
-        category:"juices",
-        image:IMAGES.juice,
-
-        name:{
-            az:"Təzə Portağal Şirəsi",
-            ru:"Свежий апельсиновый сок",
-            en:"Fresh Orange Juice"
-        },
-
-        desc:{
-            az:"Təzə sıxılmış portağal şirəsi.",
-            ru:"Свежевыжатый апельсиновый сок.",
-            en:"Freshly squeezed orange juice."
-        },
-
-        ingredients:{
-            az:"Təzə portağal.",
-            ru:"Свежие апельсины.",
-            en:"Fresh oranges."
-        },
-
-        price:8,
-        prep:5,
-        tags:["vegetarian"]
-    },
-
-    {
-        type:"bar",
-        category:"cocktails",
-        image:IMAGES.cocktail,
-
-        name:{
-            az:"French 75",
-            ru:"French 75",
-            en:"French 75"
-        },
-
-        desc:{
-            az:"Klassik fransız kokteyli, sitrus notları ilə.",
-            ru:"Классический французский коктейль с цитрусовыми нотами.",
-            en:"Classic French cocktail with bright citrus notes."
-        },
-
-        ingredients:{
-            az:"Cin, limon, şəkər siropu, köpüklü şərab.",
-            ru:"Джин, лимон, сахарный сироп, игристое вино.",
-            en:"Gin, lemon, sugar syrup, sparkling wine."
-        },
-
-        price:18,
-        prep:7,
-        tags:["chef","popular"]
-    },
-
-    {
-        type:"bar",
-        category:"wines",
-        image:IMAGES.wine,
-
-        name:{
-            az:"Chardonnay",
-            ru:"Chardonnay",
-            en:"Chardonnay"
-        },
-
-        desc:{
-            az:"Zərif ağ şərab, meyvəli və balanslı.",
-            ru:"Элегантное белое вино, фруктовое и сбалансированное.",
-            en:"Elegant white wine, fruity and balanced."
-        },
-
-        ingredients:{
-            az:"Chardonnay üzümü.",
-            ru:"Виноград Chardonnay.",
-            en:"Chardonnay grapes."
-        },
-
-        price:14,
-        prep:1,
-        tags:["popular"]
-    },
-
-    {
-        type:"bar",
-        category:"teaCoffee",
-        image:IMAGES.coffee,
-
-        name:{
-            az:"Café Crème",
-            ru:"Кафе-крем",
-            en:"Café Crème"
-        },
-
-        desc:{
-            az:"Espresso və yumşaq süd köpüyü.",
-            ru:"Эспрессо с нежной молочной пеной.",
-            en:"Espresso with smooth steamed milk foam."
-        },
-
-        ingredients:{
-            az:"Espresso, süd.",
-            ru:"Эспрессо, молоко.",
-            en:"Espresso, milk."
-        },
-
-        price:7,
-        prep:4,
-        tags:["vegetarian"]
-    }
-];
-
-
-/* =========================================================
-   CATEGORIES
-========================================================= */
-
-const KITCHEN_CATEGORIES = [
-    "salads",
-    "soups",
-    "breakfasts",
-    "appetizers",
-    "crepes",
-    "mains",
-    "pizzas",
-    "sandwiches"
-];
-
-const BAR_CATEGORIES = [
-    "juices",
-    "cocktails",
-    "wines",
-    "teaCoffee"
-];
-
-
-/* =========================================================
-   LANGUAGE
-========================================================= */
-
-function changeLanguage(lang){
-
-    if(!TEXT[lang]){
-        return;
-    }
-
-    language = lang;
-
-    localStorage.setItem(
-        "leBuffetLanguage",
-        language
-    );
-
-    /*
-       Immediately rebuilds the screen.
-       Therefore:
-       1. active language button changes;
-       2. text changes;
-       3. current menu remains open if already inside.
-    */
-
-    render();
-
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-function goToChoice(){
-
-    screen = "choice";
-
-    render();
-
-}
-
-
-function goBackCover(){
-
-    screen = "cover";
-
-    render();
-
-}
-
-
-function openMenu(type){
-
+  ];
+
+  const categoriesMap = {
+    kitchen: [
+      { id: "all", name: { az: "Hamısı", ru: "Все", en: "All" } },
+      { id: "salads", name: { az: "Salatlar", ru: "Салаты", en: "Salads" } },
+      { id: "soups", name: { az: "Şorbalar", ru: "Супы", en: "Soups" } }
+    ],
+    bar: [
+      { id: "all", name: { az: "Hamısı", ru: "Все", en: "All" } },
+      { id: "cocktails", name: { az: "Kokteyllər", ru: "Коктейли", en: "Cocktails" } }
+    ]
+  };
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      const btnLang = b.getAttribute('data-lang');
+      b.classList.toggle('active', btnLang === lang);
+    });
+    renderCategories();
+    renderMenu();
+  }
+
+  function goToChoice() {
+    document.getElementById('splash-screen').classList.remove('active');
+    document.getElementById('choice-screen').classList.add('active');
+  }
+
+  function goBack() {
+    document.getElementById('menu-screen').classList.remove('active');
+    document.getElementById('choice-screen').classList.add('active');
+  }
+
+  function openMenu(type) {
     currentType = type;
-    currentCategory = "all";
-    searchQuery = "";
-
-    screen = "menu";
-
-    render();
-
-}
-
-
-function setCategory(category){
-
-    currentCategory = category;
-
-    render();
-
-}
-
-
-function setSearch(value){
-
-    searchQuery = value.toLowerCase().trim();
-
-    render();
-
-}
-
-
-/* =========================================================
-   COVER SCREEN
-========================================================= */
-
-function coverScreen(){
-
-    return `
-
-        <main class="screen cover">
-
-            <div class="cover-photo"></div>
-
-            <div class="cover-controls">
-
-                <div class="language-switcher">
-
-                    <button
-                        class="cover-language ${language === "az" ? "active" : ""}"
-                        onclick="changeLanguage('az')"
-                        aria-label="Azərbaycan dili">
-                        AZ
-                    </button>
-
-                    <button
-                        class="cover-language ${language === "ru" ? "active" : ""}"
-                        onclick="changeLanguage('ru')"
-                        aria-label="Русский язык">
-                        RU
-                    </button>
-
-                    <button
-                        class="cover-language ${language === "en" ? "active" : ""}"
-                        onclick="changeLanguage('en')"
-                        aria-label="English">
-                        EN
-                    </button>
-
-                </div>
-
-
-                <button
-                    class="cover-continue"
-                    onclick="goToChoice()">
-
-                    ${escapeHTML(t().continue)}
-
-                </button>
-
-            </div>
-
-        </main>
-
-    `;
-
-}
-
-
-/* =========================================================
-   CHOICE SCREEN
-========================================================= */
-
-function choiceScreen(){
-
-    return `
-
-        <main class="screen choice">
-
-            <div class="choice-header">
-
-                <div class="brand-mini">
-                    Le Buffet
-                </div>
-
-                <button
-                    class="back-btn"
-                    onclick="goBackCover()">
-
-                    ${escapeHTML(t().back)}
-
-                </button>
-
-            </div>
-
-
-            <div class="choice-title">
-
-                <h1>
-                    ${escapeHTML(t().choiceTitle)}
-                </h1>
-
-                <p>
-                    ${escapeHTML(t().choiceSubtitle)}
-                </p>
-
-            </div>
-
-
-            <div class="choice-grid">
-
-                <article
-                    class="choice-card"
-                    onclick="openMenu('kitchen')">
-
-                    <div class="choice-icon">
-                        🍽️
-                    </div>
-
-                    <h2>
-                        ${escapeHTML(t().kitchen)}
-                    </h2>
-
-                    <p>
-                        ${escapeHTML(t().kitchenSub)}
-                    </p>
-
-                </article>
-
-
-                <article
-                    class="choice-card"
-                    onclick="openMenu('bar')">
-
-                    <div class="choice-icon">
-                        🍷
-                    </div>
-
-                    <h2>
-                        ${escapeHTML(t().bar)}
-                    </h2>
-
-                    <p>
-                        ${escapeHTML(t().barSub)}
-                    </p>
-
-                </article>
-
-            </div>
-
-        </main>
-
-    `;
-
-}
-
-
-/* =========================================================
-   TAG TRANSLATION
-========================================================= */
-
-function translateTag(tag){
-
-    if(tag === "chef"){
-        return t().chef;
-    }
-
-    if(tag === "vegetarian"){
-        return t().vegetarian;
-    }
-
-    if(tag === "popular"){
-        return t().popular;
-    }
-
-    return tag;
-
-}
-
-
-/* =========================================================
-   MENU SCREEN
-========================================================= */
-
-function menuScreen(){
-
-    const categories =
-        currentType === "kitchen"
-            ? KITCHEN_CATEGORIES
-            : BAR_CATEGORIES;
-
-
-    let dishes = MENU.filter(
-        item => item.type === currentType
-    );
-
-
-    if(currentCategory !== "all"){
-
-        dishes = dishes.filter(
-            item => item.category === currentCategory
-        );
-
-    }
-
-
-    if(searchQuery){
-
-        dishes = dishes.filter(item => {
-
-            const name =
-                item.name[language] || "";
-
-            const desc =
-                item.desc[language] || "";
-
-            const ingredients =
-                item.ingredients[language] || "";
-
-            const combined = (
-                name +
-                " " +
-                desc +
-                " " +
-                ingredients
-            ).toLowerCase();
-
-            return combined.includes(searchQuery);
-
-        });
-
-    }
-
-
-    return `
-
-        <main class="screen menu-screen">
-
-            <header class="menu-top">
-
-                <div class="menu-top-inner">
-
-                    <div class="menu-top-row">
-
-                        <button
-                            class="menu-back"
-                            onclick="goToChoice()">
-
-                            ←
-
-                        </button>
-
-
-                        <div class="menu-brand">
-                            Le Buffet
-                        </div>
-
-
-                        <div class="menu-type">
-
-                            ${
-                                currentType === "kitchen"
-                                    ? escapeHTML(t().kitchenTitle)
-                                    : escapeHTML(t().barTitle)
-                            }
-
-                        </div>
-
-                    </div>
-
-
-                    <input
-                        class="search"
-                        type="search"
-                        value="${escapeHTML(searchQuery)}"
-                        placeholder="${escapeHTML(t().search)}"
-                        oninput="setSearch(this.value)"
-                        autocomplete="off">
-
-                </div>
-
-            </header>
-
-
-            <div class="categories">
-
-                <button
-                    class="category ${currentCategory === "all" ? "active" : ""}"
-                    onclick="setCategory('all')">
-
-                    ${escapeHTML(t().all)}
-
-                </button>
-
-
-                ${categories.map(category => `
-
-                    <button
-                        class="category ${currentCategory === category ? "active" : ""}"
-                        onclick="setCategory('${category}')">
-
-                        ${escapeHTML(t()[category])}
-
-                    </button>
-
-                `).join("")}
-
-            </div>
-
-
-            <section class="menu-content">
-
-                <h1 class="section-title">
-
-                    ${
-                        currentType === "kitchen"
-                            ? escapeHTML(t().kitchenTitle)
-                            : escapeHTML(t().barTitle)
-                    }
-
-                </h1>
-
-
-                ${
-                    dishes.length
-                    ? `
-                        <div class="dishes">
-
-                            ${dishes.map((dish,index) =>
-                                dishHTML(dish,index)
-                            ).join("")}
-
-                        </div>
-                    `
-                    : `
-                        <div class="empty">
-
-                            <div class="empty-icon">
-                                🔎
-                            </div>
-
-                            ${escapeHTML(t().noResults)}
-
-                        </div>
-                    `
-                }
-
-            </section>
-
-        </main>
-
-    `;
-
-}
-
-
-/* =========================================================
-   DISH HTML
-========================================================= */
-
-function dishHTML(dish,index){
-
-    const name =
-        dish.name[language] || dish.name.en;
-
-    const desc =
-        dish.desc[language] || dish.desc.en;
-
-
-    return `
-
-        <article
-            class="dish"
-            onclick="openDish(${MENU.indexOf(dish)})">
-
-            <div
-                class="dish-image"
-                style="background-image:url('${dish.image}')">
-            </div>
-
-
-            <div class="dish-info">
-
-                <h2 class="dish-name">
-                    ${escapeHTML(name)}
-                </h2>
-
-
-                <p class="dish-desc">
-                    ${escapeHTML(desc)}
-                </p>
-
-
-                <div class="dish-bottom">
-
-                    <div class="price">
-                        ${dish.price} ₼
-                    </div>
-
-
-                    <div class="tags">
-
-                        ${
-                            dish.tags.slice(0,2).map(tag => `
-
-                                <span class="tag">
-                                    ${escapeHTML(translateTag(tag))}
-                                </span>
-
-                            `).join("")
-                        }
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </article>
-
-    `;
-
-}
-
-
-/* =========================================================
-   DISH MODAL
-========================================================= */
-
-function openDish(index){
-
-    const dish = MENU[index];
-
-    if(!dish){
-        return;
-    }
-
-    const name =
-        dish.name[language] || dish.name.en;
-
-    const ingredients =
-        dish.ingredients[language] ||
-        dish.ingredients.en;
-
-
-    const modal = document.createElement("div");
-
-    modal.className = "modal show";
-
-    modal.id = "dishModal";
-
-
-    modal.innerHTML = `
-
-        <div class="modal-card">
-
-            <div
-                class="modal-image"
-                style="background-image:url('${dish.image}')">
-
-                <button
-                    class="modal-close"
-                    onclick="closeDish()">
-
-                    ×
-
-                </button>
-
-            </div>
-
-
-            <div class="modal-body">
-
-                <h2 class="modal-title">
-                    ${escapeHTML(name)}
-                </h2>
-
-
-                <div class="modal-price">
-                    ${dish.price} ₼
-                </div>
-
-
-                <div class="modal-description">
-
-                    <strong>
-                        ${escapeHTML(t().ingredients)}
-                    </strong>
-
-                    <br>
-
-                    ${escapeHTML(ingredients)}
-
-                </div>
-
-
-                <div class="modal-meta">
-
-                    <strong>
-                        ${escapeHTML(t().prep)}:
-                    </strong>
-
-                    ${dish.prep} ${escapeHTML(t().minutes)}
-
-                    <br>
-
-                    <strong>
-                        ${escapeHTML(t().service)}:
-                    </strong>
-
-                    10%
-
-                </div>
-
-            </div>
-
-        </div>
-
-    `;
-
-
-    modal.addEventListener("click",function(event){
-
-        if(event.target === modal){
-            closeDish();
-        }
-
+    currentCategory = 'all';
+    document.getElementById('choice-screen').classList.remove('active');
+    document.getElementById('menu-screen').classList.add('active');
+    renderCategories();
+    renderMenu();
+  }
+
+  function renderCategories() {
+    const container = document.getElementById('categories-container');
+    if (!container) return;
+    container.innerHTML = '';
+    categoriesMap[currentType].forEach(cat => {
+      const chip = document.createElement('div');
+      chip.className = `cat-chip ${currentCategory === cat.id ? 'active' : ''}`;
+      chip.innerText = cat.name[currentLang];
+      chip.addEventListener('click', () => {
+        currentCategory = cat.id;
+        renderCategories();
+        renderMenu();
+      });
+      container.appendChild(chip);
+    });
+  }
+
+  function renderMenu() {
+    const container = document.getElementById('menu-container');
+    const searchBox = document.getElementById('search-input');
+    if (!container || !searchBox) return;
+    const searchVal = searchBox.value.toLowerCase();
+    container.innerHTML = '';
+
+    const filtered = menu.filter(item => {
+      const matchesType = item.type === currentType;
+      const matchesCat = currentCategory === 'all' || item.category === currentCategory;
+      const matchesSearch = item.name[currentLang].toLowerCase().includes(searchVal);
+      return matchesType && matchesCat && matchesSearch;
     });
 
+    filtered.forEach(item => {
+      const card = document.createElement('div');
+      card.className = 'food-card glass-panel';
+      card.addEventListener('click', () => openDishModal(item.id));
+      card.innerHTML = `
+        <img src="${item.image}" class="food-img" alt="${item.name[currentLang]}">
+        <div class="food-info">
+          <div class="food-title">${item.name[currentLang]}</div>
+          <div class="food-desc">${item.ingredients[currentLang]}</div>
+          <div class="food-bottom">
+            <span class="food-price">${item.price.toFixed(2)} ₼</span>
+            <span class="food-time">◷ ${item.time} min</span>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
 
-    document.body.appendChild(modal);
+  function openDishModal(id) {
+    const item = menu.find(m => m.id === id);
+    if (!item) return;
+    const modal = document.getElementById('dish-modal');
+    const body = document.getElementById('modal-body');
+    if (!modal || !body) return;
 
-}
+    body.innerHTML = `
+      <img src="${item.image}" class="modal-img" alt="${item.name[currentLang]}">
+      <h2 style="font-size: 24px;">${item.name[currentLang]}</h2>
+      <p style="color: rgba(255,255,255,0.7); margin: 8px 0;">${item.ingredients[currentLang]}</p>
+      <div style="font-size: 22px; font-weight: bold; color: var(--accent-gold); margin: 12px 0;">
+        ${item.price.toFixed(2)} ₼
+      </div>
+      <button class="add-cart-btn" id="btn-modal-add">Səbətə əlavə et</button>
+      <button class="back-btn" style="width:100%; margin-top: 8px;" id="btn-modal-close">Bağla</button>
+    `;
 
+    document.getElementById('btn-modal-add').addEventListener('click', () => addToCart(item.id));
+    document.getElementById('btn-modal-close').addEventListener('click', closeDishModal);
 
-function closeDish(){
+    modal.classList.add('active');
+  }
 
-    const modal =
-        document.getElementById("dishModal");
+  function closeDishModal() {
+    const modal = document.getElementById('dish-modal');
+    if (modal) modal.classList.remove('active');
+  }
 
-    if(modal){
-        modal.remove();
+  function addToCart(id) {
+    const item = menu.find(m => m.id === id);
+    if (item) {
+      cart.push(item);
+      const cartCount = document.getElementById('cart-count');
+      if (cartCount) cartCount.innerText = cart.length.toString();
     }
+    closeDishModal();
+  }
 
-}
+  function toggleCart() {
+    const modal = document.getElementById('cart-modal');
+    if (!modal) return;
+    modal.classList.toggle('active');
+    if (modal.classList.contains('active')) renderCart();
+  }
 
+  function renderCart() {
+    const container = document.getElementById('cart-items');
+    if (!container) return;
+    container.innerHTML = '';
+    let subtotal = 0;
 
-/* =========================================================
-   RENDER
-========================================================= */
+    cart.forEach(item => {
+      subtotal += item.price;
+      const row = document.createElement('div');
+      row.style.cssText = "display:flex; justify-content:space-between; margin-bottom: 8px;";
+      row.innerHTML = `<span>${item.name[currentLang]}</span><span>${item.price.toFixed(2)} ₼</span>`;
+      container.appendChild(row);
+    });
 
-function render(){
+    const service = subtotal * 0.10;
+    const total = subtotal + service;
 
-    const app =
-        document.getElementById("app");
+    document.getElementById('cart-subtotal').innerText = subtotal.toFixed(2) + " ₼";
+    document.getElementById('cart-service').innerText = service.toFixed(2) + " ₼";
+    document.getElementById('cart-total').innerText = total.toFixed(2) + " ₼";
+  }
 
+  // EVENT LISTENERS BINDING
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('splash-screen').addEventListener('click', goToChoice);
+    
+    document.querySelectorAll('.lang-switcher-splash').forEach(box => {
+      box.addEventListener('click', (ev) => ev.stopPropagation());
+    });
 
-    if(screen === "cover"){
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', (ev) => {
+        ev.stopPropagation();
+        const lang = btn.getAttribute('data-lang');
+        if (lang) setLang(lang);
+      });
+    });
 
-        app.innerHTML =
-            coverScreen();
+    document.getElementById('btn-kitchen').addEventListener('click', () => openMenu('kitchen'));
+    document.getElementById('btn-bar').addEventListener('click', () => openMenu('bar'));
+    document.getElementById('btn-back').addEventListener('click', goBack);
+    document.getElementById('btn-cart-toggle').addEventListener('click', toggleCart);
+    document.getElementById('btn-close-cart').addEventListener('click', toggleCart);
+    document.getElementById('btn-confirm-order').addEventListener('click', () => alert('Sifarişiniz qəbul olundu!'));
+    document.getElementById('search-input').addEventListener('input', renderMenu);
 
-        document.documentElement.lang =
-            language;
-
-        return;
-
+    if ('serviceWorker' in navigator) {
+      const swCode = `
+        self.addEventListener('install', e => e.waitUntil(caches.open('v1').then(c => c.addAll(['./']))));
+        self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
+      `;
+      const blob = new Blob([swCode], { type: 'text/javascript' });
+      navigator.serviceWorker.register(URL.createObjectURL(blob)).catch(() => {});
     }
-
-
-    if(screen === "choice"){
-
-        app.innerHTML =
-            choiceScreen();
-
-        document.documentElement.lang =
-            language;
-
-        return;
-
-    }
-
-
-    if(screen === "menu"){
-
-        app.innerHTML =
-            menuScreen();
-
-        document.documentElement.lang =
-            language;
-
-        return;
-
-    }
-
-}
-
-
-/* =========================================================
-   START
-========================================================= */
-
-render();
-
+  });
 </script>
-
 </body>
 </html>
