@@ -1,151 +1,2014 @@
 <!DOCTYPE html>
 <html lang="az">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Le Buffet | Bistro · Wine · Coffee</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#160b07">
+<title>Le Buffet — Bistro · Wine · Coffee</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#120806;
+    --bg2:#24120b;
+    --cream:#f8ecd4;
+    --cream2:#ead8b6;
+    --gold:#e5b95f;
+    --gold2:#ffe5a5;
+    --brown:#2b170d;
+    --glass:rgba(35,18,11,.68);
+    --glass2:rgba(255,239,205,.08);
+    --border:rgba(255,214,139,.30);
+    --shadow:0 20px 70px rgba(0,0,0,.55);
+}
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--cream);
+    font-family:Inter,Arial,sans-serif;
+}
+
+button,
+input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.hidden{
+    display:none!important;
+}
+
+/* =========================
+   APP
+========================= */
+
+#app{
+    min-height:100vh;
+    min-height:100svh;
+    background:
+        radial-gradient(circle at 20% 10%,rgba(255,176,70,.08),transparent 30%),
+        radial-gradient(circle at 80% 70%,rgba(255,192,79,.06),transparent 35%),
+        var(--bg);
+}
+
+.screen{
+    min-height:100vh;
+    min-height:100svh;
+    padding:20px 17px 105px;
+    position:relative;
+    animation:screenIn .35s ease;
+}
+
+@keyframes screenIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+/* =========================
+   COVER
+========================= */
+
+.cover{
+    padding:0;
+    overflow:hidden;
+    background:#100704;
+    position:relative;
+}
+
+.cover-photo{
+    position:absolute;
+    inset:0;
+    background-image:
+        linear-gradient(
+            rgba(40,13,5,.04),
+            rgba(22,7,3,.08)
+        ),
+        url("cover.jpg");
+    background-position:center;
+    background-size:cover;
+    background-repeat:no-repeat;
+}
+
+/*
+   Интерактивные зоны поверх твоей фотографии.
+   Сама фотография уже содержит:
+   Le Buffet
+   BISTRO WINE COFFEE
+   MENU
+   Un coin de plaisir
+   AZ RU EN
+   TAP TO SCREEN
+*/
+
+.cover-controls{
+    position:absolute;
+    inset:0;
+    z-index:10;
+    pointer-events:none;
+}
+
+/* языки */
+
+.cover-lang{
+    position:absolute;
+    top:70%;
+    width:11%;
+    height:7%;
+    border:0;
+    background:transparent;
+    pointer-events:auto;
+}
+
+.cover-lang.az{
+    left:30%;
+}
+
+.cover-lang.ru{
+    left:44.5%;
+}
+
+.cover-lang.en{
+    left:59%;
+}
+
+/* кнопка */
+
+.cover-continue{
+    position:absolute;
+    left:17%;
+    right:17%;
+    bottom:8.3%;
+    height:8.5%;
+    border:0;
+    border-radius:100px;
+    background:transparent;
+    pointer-events:auto;
+}
+
+/* =========================
+   GLASS
+========================= */
+
+.glass{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(70,39,23,.72),
+            rgba(19,9,6,.62)
+        );
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+}
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:30;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:4px 0 15px;
+
+    background:linear-gradient(
+        rgba(18,8,6,.96),
+        rgba(18,8,6,.72),
+        transparent
+    );
+}
+
+.back-btn,
+.home-btn{
+    border:1px solid var(--border);
+    background:rgba(26,12,7,.72);
+    color:var(--cream);
+    padding:10px 14px;
+    border-radius:100px;
+    backdrop-filter:blur(15px);
+}
+
+.small-logo{
+    text-align:center;
+    font-family:"Cormorant Garamond",serif;
+    font-size:29px;
+    line-height:.85;
+    color:var(--gold2);
+    font-weight:600;
+}
+
+.small-logo span{
+    display:block;
+    margin-top:7px;
+    font-family:Inter,sans-serif;
+    font-size:7px;
+    letter-spacing:3px;
+    color:var(--cream2);
+}
+
+/* =========================
+   TITLES
+========================= */
+
+.center{
+    text-align:center;
+}
+
+.ornament{
+    color:var(--gold);
+    font-size:30px;
+    margin:7px 0;
+}
+
+.title{
+    margin:4px 0;
+    font-family:"Cormorant Garamond",serif;
+    font-size:48px;
+    line-height:.95;
+    font-weight:600;
+}
+
+.subtitle{
+    margin:8px 0 20px;
+    color:#cbb99d;
+    font-size:13px;
+}
+
+/* =========================
+   CHOICE
+========================= */
+
+.choice-grid{
+    display:grid;
+    gap:16px;
+    margin-top:30px;
+}
+
+.choice-card{
+    min-height:275px;
+    position:relative;
+    overflow:hidden;
+    border-radius:28px;
+    border:1px solid var(--border);
+    color:white;
+    text-align:left;
+    padding:23px;
+    display:flex;
+    align-items:flex-end;
+
+    background-size:cover;
+    background-position:center;
+
+    box-shadow:var(--shadow);
+}
+
+.choice-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        linear-gradient(
+            transparent 15%,
+            rgba(13,5,2,.88) 100%
+        );
+}
+
+.choice-card > *{
+    position:relative;
+    z-index:2;
+}
+
+.kitchen{
+    background-image:url(
+        "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=85"
+    );
+}
+
+.bar{
+    background-image:url(
+        "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=1200&q=85"
+    );
+}
+
+.choice-name{
+    font-family:"Cormorant Garamond",serif;
+    font-size:43px;
+    font-weight:600;
+}
+
+.choice-desc{
+    color:#dfceb0;
+    font-size:12px;
+    margin-top:3px;
+}
+
+.choice-arrow{
+    position:absolute;
+    right:22px;
+    bottom:19px;
+    font-size:32px;
+    color:var(--gold2);
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    margin:8px 0 12px;
+    padding:13px 15px;
+
+    border-radius:19px;
+}
+
+.search-icon{
+    color:var(--gold2);
+    font-size:20px;
+}
+
+.search input{
+    width:100%;
+    min-width:0;
+
+    border:0;
+    outline:0;
+
+    background:transparent;
+    color:var(--cream);
+
+    font-size:14px;
+}
+
+.search input::placeholder{
+    color:#a99b87;
+}
+
+/* =========================
+   CATEGORY CHIPS
+========================= */
+
+.categories{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    scrollbar-width:none;
+    padding:3px 0 15px;
+}
+
+.categories::-webkit-scrollbar{
+    display:none;
+}
+
+.category{
+    flex:none;
+
+    padding:9px 15px;
+
+    border-radius:100px;
+    border:1px solid var(--border);
+
+    background:rgba(39,21,12,.65);
+    color:#d9c8a9;
+
+    white-space:nowrap;
+}
+
+.category.active{
+    background:linear-gradient(
+        135deg,
+        #f5d685,
+        #b77b2e
+    );
+
+    color:#241409;
+
+    border-color:#ffe2a0;
+
+    box-shadow:0 7px 25px rgba(226,176,72,.2);
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu{
+    display:grid;
+    gap:10px;
+}
+
+.dish{
+    width:100%;
+
+    display:grid;
+    grid-template-columns:88px 1fr auto;
+    align-items:center;
+    gap:12px;
+
+    padding:10px;
+
+    border-radius:21px;
+
+    color:var(--cream);
+    text-align:left;
+}
+
+.dish-image{
+    width:88px;
+    height:88px;
+
+    border-radius:16px;
+
+    object-fit:cover;
+
+    background:#21110a;
+}
+
+.dish-info{
+    min-width:0;
+}
+
+.dish-name{
+    font-family:"Cormorant Garamond",serif;
+    font-size:23px;
+    line-height:1;
+    font-weight:600;
+
+    margin-bottom:5px;
+}
+
+.dish-ingredients{
+    color:#bcae98;
+    font-size:10.5px;
+    line-height:1.4;
+
+    display:-webkit-box;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+
+    overflow:hidden;
+}
+
+.badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+    margin-top:7px;
+}
+
+.badge{
+    padding:4px 7px;
+
+    border-radius:100px;
+
+    border:1px solid rgba(255,211,126,.30);
+
+    background:rgba(255,191,76,.08);
+
+    color:#e5c987;
+
+    font-size:8px;
+}
+
+.dish-right{
+    text-align:right;
+}
+
+.price{
+    color:var(--gold2);
+    font-size:15px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.time{
+    color:#a99a84;
+    font-size:9px;
+    margin-top:8px;
+    white-space:nowrap;
+}
+
+.no-results{
+    text-align:center;
+    color:#a99a84;
+    padding:50px 10px;
+}
+
+/* =========================
+   SERVICE
+========================= */
+
+.service{
+    position:fixed;
+    z-index:40;
+
+    left:50%;
+    bottom:11px;
+
+    transform:translateX(-50%);
+
+    padding:9px 15px;
+
+    border-radius:100px;
+
+    white-space:nowrap;
+
+    background:rgba(20,9,5,.88);
+
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(15px);
+
+    color:#d7c39c;
+
+    font-size:9px;
+    letter-spacing:1.7px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    z-index:100;
+
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+
+    padding:10px;
+
+    background:rgba(3,1,0,.78);
+
+    animation:modalBg .25s ease;
+}
+
+@keyframes modalBg{
+    from{opacity:0}
+    to{opacity:1}
+}
+
+.modal-box{
+    width:min(620px,100%);
+    max-height:94svh;
+
+    overflow:auto;
+
+    border-radius:30px;
+
+    animation:modalIn .3s ease;
+}
+
+@keyframes modalIn{
+    from{
+        transform:translateY(40px);
+        opacity:0;
+    }
+    to{
+        transform:none;
+        opacity:1;
+    }
+}
+
+.modal-image{
+    width:100%;
+    height:310px;
+
+    object-fit:cover;
+
+    display:block;
+
+    border-radius:30px 30px 0 0;
+}
+
+.modal-body{
+    padding:20px;
+}
+
+.close{
+    float:right;
+
+    width:40px;
+    height:40px;
+
+    border-radius:50%;
+
+    border:1px solid var(--border);
+
+    background:rgba(20,9,5,.7);
+
+    color:white;
+
+    font-size:25px;
+}
+
+.modal-title{
+    font-family:"Cormorant Garamond",serif;
+    font-size:43px;
+    line-height:.95;
+    font-weight:600;
+
+    margin-top:15px;
+
+    padding-right:45px;
+}
+
+.modal-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin:15px 0;
+
+    color:#d2c09f;
+}
+
+.modal-price{
+    color:var(--gold2);
+    font-size:23px;
+    font-weight:800;
+}
+
+.line{
+    height:1px;
+    background:var(--border);
+    margin:16px 0;
+}
+
+.modal-text{
+    color:#d0c0a7;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.close-button{
+    width:100%;
+    border:1px solid rgba(255,226,160,.7);
+
+    background:linear-gradient(
+        135deg,
+        #f3cf7c,
+        #b87d2e
+    );
+
+    color:#241409;
+
+    font-weight:800;
+
+    padding:15px;
+
+    border-radius:100px;
+
+    margin-top:10px;
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media(min-width:700px){
+
+    .screen{
+        max-width:900px;
+        margin:auto;
+    }
+
+    .choice-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .modal{
+        align-items:center;
+    }
+
+    .modal-box{
+        max-height:90vh;
+    }
+
+    .cover{
+        max-width:none;
+    }
+
+}
+</style>
 </head>
+
 <body>
-  <div id="app">
-    <!-- COVER SCREEN -->
-    <div id="coverScreen" class="screen active">
-      <div class="cover-content">
-        <div class="cover-logo">Le Buffet</div>
-        <div class="cover-subtitle">BISTRO · WINE · COFFEE</div>
-        <div class="cover-tagline">Un coin de plaisir</div>
-        
-        <div class="language-selector">
-          <button class="lang-btn" data-lang="az">AZ</button>
-          <button class="lang-btn" data-lang="ru">RU</button>
-          <button class="lang-btn" data-lang="en">EN</button>
-        </div>
 
-        <button class="btn-start" id="startBtn">
-          <span class="az-text">DAVAM ETMƏK ÜÇÜN TOXUNUN</span>
-          <span class="ru-text" style="display:none;">НАЖМИТЕ ДЛЯ ПРОДОЛЖЕНИЯ</span>
-          <span class="en-text" style="display:none;">TAP TO CONTINUE</span>
+<div id="app"></div>
+
+<script>
+
+/* =========================================================
+   LE BUFFET
+   ЯЗЫКИ
+========================================================= */
+
+const TEXT = {
+
+    az:{
+        continue:"TAP TO SCREEN",
+        kitchen:"MƏTBƏX",
+        bar:"BAR",
+        kitchenDesc:"Ləzzətin Ünvanı",
+        barDesc:"Qədəhdəki Hekayə",
+
+        back:"Geri",
+        home:"Ana səhifə",
+
+        search:"Menyuda axtar...",
+        all:"Hamısı",
+
+        service:"SERVİS HAQQI 10%",
+
+        popular:"Populyar",
+        chef:"Şef tövsiyəsi",
+        vegetarian:"Vegetarian",
+
+        ingredients:"Tərkibi:",
+        close:"BAĞLA",
+
+        noResults:"Nəticə tapılmadı",
+
+        min:"dəq"
+    },
+
+    ru:{
+        continue:"КОСНИТЕСЬ, ЧТОБЫ ПРОДОЛЖИТЬ",
+        kitchen:"КУХНЯ",
+        bar:"БАР",
+        kitchenDesc:"С пылу, с жару",
+        barDesc:"Здесь наливают счастье",
+
+        back:"Назад",
+        home:"Главная",
+
+        search:"Поиск по меню...",
+        all:"Все",
+
+        service:"СЕРВИСНЫЙ СБОР 10%",
+
+        popular:"Популярное",
+        chef:"Рекомендация шефа",
+        vegetarian:"Вегетарианское",
+
+        ingredients:"Состав:",
+        close:"ЗАКРЫТЬ",
+
+        noResults:"Ничего не найдено",
+
+        min:"мин"
+    },
+
+    en:{
+        continue:"TAP TO SCREEN",
+        kitchen:"KITCHEN",
+        bar:"BAR",
+        kitchenDesc:"From Fire to Table",
+        barDesc:"Sip the Story",
+
+        back:"Back",
+        home:"Home",
+
+        search:"Search menu...",
+        all:"All",
+
+        service:"SERVICE CHARGE 10%",
+
+        popular:"Popular",
+        chef:"Chef's choice",
+        vegetarian:"Vegetarian",
+
+        ingredients:"Ingredients:",
+        close:"CLOSE",
+
+        noResults:"No results",
+
+        min:"min"
+    }
+
+};
+
+
+/* =========================================================
+   КАТЕГОРИИ
+========================================================= */
+
+const CATEGORIES = {
+
+    kitchen:[
+        ["salads","Салаты"],
+        ["soups","Супы"],
+        ["breakfast","Завтраки"],
+        ["cold","Холодные закуски"],
+        ["crepes","Блины / Крепы"],
+        ["mains","Основные блюда"],
+        ["pizza","Пиццы / Киши"],
+        ["sandwiches","Сэндвичи"]
+    ],
+
+    bar:[
+        ["juices","Соки / Лимонады"],
+        ["cocktails","Коктейли"],
+        ["wine","Вина"],
+        ["coffee","Чай / Кофе"]
+    ]
+
+};
+
+
+/* =========================================================
+   ФОТОГРАФИИ
+========================================================= */
+
+const IMAGES = {
+
+    caesar:
+    "https://images.unsplash.com/photo-1550304943-4f24f54ddde9?auto=format&fit=crop&w=900&q=85",
+
+    greek:
+    "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=900&q=85",
+
+    soup:
+    "https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=85",
+
+    breakfast:
+    "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=900&q=85",
+
+    crepe:
+    "https://images.unsplash.com/photo-1519671282421-6b4c1c1f4a3b?auto=format&fit=crop&w=900&q=85",
+
+    steak:
+    "https://images.unsplash.com/photo-1546964124-0cce460f38ef?auto=format&fit=crop&w=900&q=85",
+
+    pizza:
+    "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=85",
+
+    sandwich:
+    "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=900&q=85",
+
+    lemonade:
+    "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=85",
+
+    cocktail:
+    "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=900&q=85",
+
+    wine:
+    "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=900&q=85",
+
+    coffee:
+    "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85"
+};
+
+
+/* =========================================================
+   МЕНЮ
+   ЗАМЕНИ ЭТИ ДАННЫЕ НА ОРИГИНАЛЬНОЕ МЕНЮ
+========================================================= */
+
+const MENU = [
+
+    {
+        id:1,
+        type:"kitchen",
+        category:"salads",
+        image:IMAGES.caesar,
+        price:14.90,
+        time:15,
+        tags:["popular","chef"],
+
+        name:{
+            az:"Klassik Sezar salatı",
+            ru:"Классический салат Цезарь",
+            en:"Classic Caesar Salad"
+        },
+
+        ingredients:{
+            az:"Toyuq filesi, romaine salatı, karaviz, parmesan pendiri, kruton, Sezar sousu.",
+            ru:"Куриное филе, салат ромэн, сельдерей, пармезан, крутоны, соус Цезарь.",
+            en:"Chicken fillet, romaine lettuce, celery, parmesan, croutons, Caesar dressing."
+        }
+    },
+
+
+    {
+        id:2,
+        type:"kitchen",
+        category:"salads",
+        image:IMAGES.greek,
+        price:11.90,
+        time:10,
+        tags:["vegetarian"],
+
+        name:{
+            az:"Yunan salatı",
+            ru:"Греческий салат",
+            en:"Greek Salad"
+        },
+
+        ingredients:{
+            az:"Pomidor, xiyar, feta pendiri, zeytun, soğan, zeytun yağı.",
+            ru:"Помидоры, огурцы, сыр фета, оливки, лук, оливковое масло.",
+            en:"Tomato, cucumber, feta cheese, olives, onion, olive oil."
+        }
+    },
+
+
+    {
+        id:3,
+        type:"kitchen",
+        category:"soups",
+        image:IMAGES.soup,
+        price:7.50,
+        time:20,
+        tags:["vegetarian"],
+
+        name:{
+            az:"Karaviz şorbası",
+            ru:"Суп из сельдерея",
+            en:"Celery Soup"
+        },
+
+        ingredients:{
+            az:"Karaviz, kartof, soğan, qaymaq və tərəvəz bulyonu.",
+            ru:"Сельдерей, картофель, лук, сливки и овощной бульон.",
+            en:"Celery, potato, onion, cream and vegetable stock."
+        }
+    },
+
+
+    {
+        id:4,
+        type:"kitchen",
+        category:"breakfast",
+        image:IMAGES.breakfast,
+        price:13.50,
+        time:15,
+        tags:["popular"],
+
+        name:{
+            az:"Fransız səhər yeməyi",
+            ru:"Французский завтрак",
+            en:"French Breakfast"
+        },
+
+        ingredients:{
+            az:"Yumurta, kruassan, pendir, kərə yağı, mürəbbə və meyvə.",
+            ru:"Яйца, круассан, сыр, сливочное масло, джем и фрукты.",
+            en:"Eggs, croissant, cheese, butter, jam and fruit."
+        }
+    },
+
+
+    {
+        id:5,
+        type:"kitchen",
+        category:"crepes",
+        image:IMAGES.crepe,
+        price:9.90,
+        time:12,
+        tags:["vegetarian"],
+
+        name:{
+            az:"Krep Suzette",
+            ru:"Креп Сюзетт",
+            en:"Crêpe Suzette"
+        },
+
+        ingredients:{
+            az:"Nazik krep, portağal, kərə yağı, şəkər və vanil.",
+            ru:"Тонкий креп, апельсин, сливочное масло, сахар и ваниль.",
+            en:"Thin crêpe, orange, butter, sugar and vanilla."
+        }
+    },
+
+
+    {
+        id:6,
+        type:"kitchen",
+        category:"mains",
+        image:IMAGES.steak,
+        price:28.90,
+        time:25,
+        tags:["chef","popular"],
+
+        name:{
+            az:"Şefin bifşteksi",
+            ru:"Стейк от шефа",
+            en:"Chef's Steak"
+        },
+
+        ingredients:{
+            az:"Mal əti, rozmarin, kərə yağı, qara istiot və tərəvəz qarniri.",
+            ru:"Говядина, розмарин, сливочное масло, чёрный перец и овощной гарнир.",
+            en:"Beef, rosemary, butter, black pepper and seasonal vegetables."
+        }
+    },
+
+
+    {
+        id:7,
+        type:"kitchen",
+        category:"pizza",
+        image:IMAGES.pizza,
+        price:16.90,
+        time:18,
+        tags:["popular"],
+
+        name:{
+            az:"Pizza Margherita",
+            ru:"Пицца Маргарита",
+            en:"Pizza Margherita"
+        },
+
+        ingredients:{
+            az:"Pomidor sousu, mozzarella, reyhan və zeytun yağı.",
+            ru:"Томатный соус, моцарелла, базилик и оливковое масло.",
+            en:"Tomato sauce, mozzarella, basil and olive oil."
+        }
+    },
+
+
+    {
+        id:8,
+        type:"kitchen",
+        category:"sandwiches",
+        image:IMAGES.sandwich,
+        price:12.90,
+        time:10,
+        tags:[],
+
+        name:{
+            az:"Croque Monsieur",
+            ru:"Крок-месье",
+            en:"Croque Monsieur"
+        },
+
+        ingredients:{
+            az:"Çörək, vetçina, gruyère pendiri və beşamel sousu.",
+            ru:"Хлеб, ветчина, сыр грюйер и соус бешамель.",
+            en:"Bread, ham, Gruyère cheese and béchamel sauce."
+        }
+    },
+
+
+    {
+        id:9,
+        type:"bar",
+        category:"juices",
+        image:IMAGES.lemonade,
+        price:6.50,
+        time:5,
+        tags:[],
+
+        name:{
+            az:"Ev limonadı",
+            ru:"Домашний лимонад",
+            en:"House Lemonade"
+        },
+
+        ingredients:{
+            az:"Limon, nanə, şəkər siropu və qazlı su.",
+            ru:"Лимон, мята, сахарный сироп и газированная вода.",
+            en:"Lemon, mint, sugar syrup and sparkling water."
+        }
+    },
+
+
+    {
+        id:10,
+        type:"bar",
+        category:"cocktails",
+        image:IMAGES.cocktail,
+        price:12.90,
+        time:7,
+        tags:["popular"],
+
+        name:{
+            az:"Mojito",
+            ru:"Мохито",
+            en:"Mojito"
+        },
+
+        ingredients:{
+            az:"Rom, əhəng, nanə, şəkər siropu və soda.",
+            ru:"Ром, лайм, мята, сахарный сироп и содовая.",
+            en:"Rum, lime, mint, sugar syrup and soda."
+        }
+    },
+
+
+    {
+        id:11,
+        type:"bar",
+        category:"wine",
+        image:IMAGES.wine,
+        price:18.00,
+        time:3,
+        tags:["chef"],
+
+        name:{
+            az:"Chardonnay",
+            ru:"Шардоне",
+            en:"Chardonnay"
+        },
+
+        ingredients:{
+            az:"Ağ şərab — 150 ml.",
+            ru:"Белое вино — 150 мл.",
+            en:"White wine — 150 ml."
+        }
+    },
+
+
+    {
+        id:12,
+        type:"bar",
+        category:"coffee",
+        image:IMAGES.coffee,
+        price:5.50,
+        time:4,
+        tags:[],
+
+        name:{
+            az:"Cappuccino",
+            ru:"Капучино",
+            en:"Cappuccino"
+        },
+
+        ingredients:{
+            az:"Espresso, süd və süd köpüyü.",
+            ru:"Эспрессо, молоко и молочная пена.",
+            en:"Espresso, milk and milk foam."
+        }
+    }
+
+];
+
+
+/* =========================================================
+   СОСТОЯНИЕ
+========================================================= */
+
+let language =
+    localStorage.getItem("leBuffetLanguage") || "az";
+
+let screen = "cover";
+
+let currentType = "kitchen";
+
+let currentCategory = "all";
+
+let searchQuery = "";
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function t(){
+
+    return TEXT[language];
+
+}
+
+
+function escapeHTML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+function nameOf(item){
+
+    return item.name[language];
+
+}
+
+
+function ingredientsOf(item){
+
+    return item.ingredients[language];
+
+}
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+function changeLanguage(lang){
+
+    language = lang;
+
+    localStorage.setItem(
+        "leBuffetLanguage",
+        lang
+    );
+
+    render();
+
+}
+
+
+/* =========================================================
+   COVER
+========================================================= */
+
+function coverScreen(){
+
+    return `
+
+        <main class="screen cover">
+
+            <div class="cover-photo"></div>
+
+            <div class="cover-controls">
+
+                <button
+                    class="cover-lang az"
+                    aria-label="Azərbaycan dili"
+                    onclick="changeLanguage('az')">
+                </button>
+
+                <button
+                    class="cover-lang ru"
+                    aria-label="Русский язык"
+                    onclick="changeLanguage('ru')">
+                </button>
+
+                <button
+                    class="cover-lang en"
+                    aria-label="English"
+                    onclick="changeLanguage('en')">
+                </button>
+
+                <button
+                    class="cover-continue"
+                    aria-label="${t().continue}"
+                    onclick="goToChoice()">
+                </button>
+
+            </div>
+
+        </main>
+
+    `;
+
+}
+
+
+/* =========================================================
+   CHOICE
+========================================================= */
+
+function goToChoice(){
+
+    screen = "choice";
+
+    render();
+
+}
+
+
+function choiceScreen(){
+
+    return `
+
+        <main class="screen">
+
+            <div class="topbar">
+
+                <button
+                    class="back-btn"
+                    onclick="screen='cover';render()">
+
+                    ← ${t().back}
+
+                </button>
+
+                <div class="small-logo">
+
+                    Le Buffet
+
+                    <span>
+                        BISTRO · WINE · COFFEE
+                    </span>
+
+                </div>
+
+                <div style="width:65px"></div>
+
+            </div>
+
+
+            <div class="center">
+
+                <div class="ornament">
+                    ❦
+                </div>
+
+                <h1 class="title">
+                    Un coin de plaisir
+                </h1>
+
+                <p class="subtitle">
+
+                    ${
+                        language==="az"
+                        ? "Zövqünüzü seçin"
+                        : language==="ru"
+                        ? "Выберите настроение"
+                        : "Choose your mood"
+                    }
+
+                </p>
+
+            </div>
+
+
+            <div class="choice-grid">
+
+                <button
+                    class="choice-card kitchen"
+                    onclick="openMenu('kitchen')">
+
+                    <div>
+
+                        <div class="choice-name">
+                            ${t().kitchen}
+                        </div>
+
+                        <div class="choice-desc">
+                            ${t().kitchenDesc}
+                        </div>
+
+                    </div>
+
+                    <span class="choice-arrow">
+                        ›
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="choice-card bar"
+                    onclick="openMenu('bar')">
+
+                    <div>
+
+                        <div class="choice-name">
+                            ${t().bar}
+                        </div>
+
+                        <div class="choice-desc">
+                            ${t().barDesc}
+                        </div>
+
+                    </div>
+
+                    <span class="choice-arrow">
+                        ›
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <div class="service">
+                ${t().service}
+            </div>
+
+        </main>
+
+    `;
+
+}
+
+
+/* =========================================================
+   OPEN MENU
+========================================================= */
+
+function openMenu(type){
+
+    currentType = type;
+
+    currentCategory = "all";
+
+    searchQuery = "";
+
+    screen = "menu";
+
+    render();
+
+}
+
+
+/* =========================================================
+   CATEGORY NAME
+========================================================= */
+
+function categoryName(category){
+
+    const found =
+        CATEGORIES[currentType]
+        .find(item => item[0] === category);
+
+    return found
+        ? found[1]
+        : "";
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function getFilteredMenu(){
+
+    let items =
+        MENU.filter(
+            item => item.type === currentType
+        );
+
+
+    if(currentCategory !== "all"){
+
+        items =
+            items.filter(
+                item =>
+                    item.category === currentCategory
+            );
+
+    }
+
+
+    if(searchQuery.trim()){
+
+        const q =
+            searchQuery
+                .trim()
+                .toLowerCase();
+
+        items =
+            items.filter(item => {
+
+                const text =
+                    (
+                        nameOf(item)
+                        + " "
+                        + ingredientsOf(item)
+                    ).toLowerCase();
+
+                return text.includes(q);
+
+            });
+
+    }
+
+
+    return items;
+
+}
+
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+function badges(item){
+
+    return item.tags.map(tag => {
+
+        if(tag === "popular"){
+
+            return `
+                <span class="badge">
+                    🔥 ${t().popular}
+                </span>
+            `;
+
+        }
+
+        if(tag === "chef"){
+
+            return `
+                <span class="badge">
+                    ★ ${t().chef}
+                </span>
+            `;
+
+        }
+
+        if(tag === "vegetarian"){
+
+            return `
+                <span class="badge">
+                    ● ${t().vegetarian}
+                </span>
+            `;
+
+        }
+
+        return "";
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   DISH CARD
+========================================================= */
+
+function dishCard(item){
+
+    return `
+
+        <button
+            class="dish glass"
+            onclick="openDish(${item.id})">
+
+            <img
+                class="dish-image"
+                src="${item.image}"
+                alt="${escapeHTML(nameOf(item))}"
+                loading="lazy"
+            >
+
+
+            <div class="dish-info">
+
+                <div class="dish-name">
+
+                    ${escapeHTML(
+                        nameOf(item)
+                    )}
+
+                </div>
+
+
+                <div class="dish-ingredients">
+
+                    ${escapeHTML(
+                        ingredientsOf(item)
+                    )}
+
+                </div>
+
+
+                <div class="badges">
+
+                    ${badges(item)}
+
+                </div>
+
+            </div>
+
+
+            <div class="dish-right">
+
+                <div class="price">
+
+                    ${item.price.toFixed(2)} ₼
+
+                </div>
+
+                <div class="time">
+
+                    ◷
+                    ${item.time}
+                    ${t().min}
+
+                </div>
+
+            </div>
+
         </button>
-      </div>
-    </div>
 
-    <!-- MAIN MENU -->
-    <div id="mainScreen" class="screen">
-      <div class="header">
-        <h1>Le Buffet</h1>
-        <p class="subtitle-header">
-          <span class="az-text">Seçim edin</span>
-          <span class="ru-text" style="display:none;">Выберите раздел</span>
-          <span class="en-text" style="display:none;">Select section</span>
-        </p>
-      </div>
+    `;
 
-      <div class="category-grid">
-        <div class="category-card" data-section="kitchen">
-          <div class="category-image kitchen-image"></div>
-          <div class="category-overlay">
-            <h2 class="az-text">MƏTBƏX</h2>
-            <h2 class="ru-text" style="display:none;">КУХНЯ</h2>
-            <h2 class="en-text" style="display:none;">KITCHEN</h2>
-          </div>
+}
+
+
+/* =========================================================
+   MENU SCREEN
+========================================================= */
+
+function menuScreen(){
+
+    const items =
+        getFilteredMenu();
+
+    const title =
+        currentType === "kitchen"
+        ? t().kitchen
+        : t().bar;
+
+
+    return `
+
+        <main class="screen">
+
+            <div class="topbar">
+
+                <button
+                    class="back-btn"
+                    onclick="screen='choice';render()">
+
+                    ← ${t().back}
+
+                </button>
+
+
+                <div class="small-logo">
+
+                    Le Buffet
+
+                    <span>
+                        BISTRO · WINE · COFFEE
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="home-btn"
+                    onclick="screen='cover';render()">
+
+                    ⌂
+
+                </button>
+
+            </div>
+
+
+            <div class="center">
+
+                <div class="ornament">
+                    ❦
+                </div>
+
+                <h1 class="title">
+                    ${title}
+                </h1>
+
+            </div>
+
+
+            <div class="glass search">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="search"
+                    value="${escapeHTML(searchQuery)}"
+                    placeholder="${t().search}"
+                    oninput="updateSearch(this.value)"
+                >
+
+            </div>
+
+
+            <div class="categories">
+
+                <button
+                    class="category ${
+                        currentCategory === "all"
+                        ? "active"
+                        : ""
+                    }"
+                    onclick="setCategory('all')">
+
+                    ${t().all}
+
+                </button>
+
+
+                ${
+                    CATEGORIES[currentType]
+                    .map(cat => `
+
+                        <button
+                            class="category ${
+                                currentCategory === cat[0]
+                                ? "active"
+                                : ""
+                            }"
+                            onclick="setCategory('${cat[0]}')">
+
+                            ${cat[1]}
+
+                        </button>
+
+                    `)
+                    .join("")
+                }
+
+            </div>
+
+
+            <div class="menu">
+
+                ${
+                    items.length
+                    ? items.map(dishCard).join("")
+                    : `
+                        <div class="no-results">
+
+                            ${t().noResults}
+
+                        </div>
+                    `
+                }
+
+            </div>
+
+
+            <div class="service">
+                ${t().service}
+            </div>
+
+        </main>
+
+    `;
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function updateSearch(value){
+
+    searchQuery = value;
+
+    render();
+
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+function setCategory(category){
+
+    currentCategory = category;
+
+    render();
+
+}
+
+
+/* =========================================================
+   DISH DETAIL
+========================================================= */
+
+function openDish(id){
+
+    const item =
+        MENU.find(
+            dish => dish.id === id
+        );
+
+    if(!item) return;
+
+
+    const modal = document.createElement("div");
+
+    modal.className = "modal";
+
+    modal.id = "dishModal";
+
+
+    modal.innerHTML = `
+
+        <div
+            class="modal-box glass"
+            onclick="event.stopPropagation()">
+
+
+            <img
+                class="modal-image"
+                src="${item.image}"
+                alt="${escapeHTML(nameOf(item))}"
+            >
+
+
+            <div class="modal-body">
+
+
+                <button
+                    class="close"
+                    onclick="closeDish()">
+
+                    ×
+
+                </button>
+
+
+                <div class="badges">
+
+                    ${badges(item)}
+
+                </div>
+
+
+                <div class="modal-title">
+
+                    ${escapeHTML(
+                        nameOf(item)
+                    )}
+
+                </div>
+
+
+                <div class="modal-meta">
+
+                    <span>
+
+                        ◷
+                        ${item.time}
+                        ${t().min}
+
+                    </span>
+
+
+                    <span class="modal-price">
+
+                        ${item.price.toFixed(2)} ₼
+
+                    </span>
+
+                </div>
+
+
+                <div class="line"></div>
+
+
+                <strong>
+
+                    ${t().ingredients}
+
+                </strong>
+
+
+                <p class="modal-text">
+
+                    ${escapeHTML(
+                        ingredientsOf(item)
+                    )}
+
+                </p>
+
+
+                <button
+                    class="close-button"
+                    onclick="closeDish()">
+
+                    ✓ ${t().close}
+
+                </button>
+
+            </div>
+
         </div>
 
-        <div class="category-card" data-section="bar">
-          <div class="category-image bar-image"></div>
-          <div class="category-overlay">
-            <h2 class="az-text">BAR</h2>
-            <h2 class="ru-text" style="display:none;">БАР</h2>
-            <h2 class="en-text" style="display:none;">BAR</h2>
-          </div>
-        </div>
-      </div>
-    </div>
+    `;
 
-    <!-- CATEGORIES SCREEN -->
-    <div id="categoriesScreen" class="screen">
-      <div class="header">
-        <button class="btn-back" id="backBtn">← 
-          <span class="az-text">GERİ</span>
-          <span class="ru-text" style="display:none;">НАЗАД</span>
-          <span class="en-text" style="display:none;">BACK</span>
-        </button>
-        <h1 id="sectionTitle">MƏTBƏX</h1>
-      </div>
 
-      <div class="search-bar">
-        <input 
-          type="text" 
-          id="searchInput" 
-          placeholder="Axtarış..."
-          class="search-input"
-        >
-        <span class="search-icon">🔍</span>
-      </div>
+    modal.onclick = function(){
 
-      <div class="categories-list" id="categoriesList"></div>
-    </div>
+        closeDish();
 
-    <!-- MENU ITEMS SCREEN -->
-    <div id="menuScreen" class="screen">
-      <div class="header">
-        <button class="btn-back" id="backFromMenuBtn">← 
-          <span class="az-text">GERİ</span>
-          <span class="ru-text" style="display:none;">НАЗАД</span>
-          <span class="en-text" style="display:none;">BACK</span>
-        </button>
-        <h1 id="categoryTitle">Salatlar</h1>
-      </div>
+    };
 
-      <div class="search-bar">
-        <input 
-          type="text" 
-          id="searchInputMenu" 
-          placeholder="Axtarış..."
-          class="search-input"
-        >
-        <span class="search-icon">🔍</span>
-      </div>
 
-      <div class="dishes-grid" id="dishesGrid"></div>
-    </div>
+    document.body.appendChild(modal);
 
-    <!-- DISH DETAIL MODAL -->
-    <div id="dishModal" class="modal">
-      <div class="modal-content">
-        <button class="modal-close">✕</button>
-        
-        <div class="dish-image-container">
-          <img id="dishImage" src="" alt="Dish" class="dish-image">
-        </div>
+    document.body.style.overflow = "hidden";
 
-        <div class="dish-info">
-          <h2 id="dishName"></h2>
-          
-          <div class="dish-tags" id="dishTags"></div>
+}
 
-          <p id="dishIngredients" class="dish-ingredients"></p>
 
-          <div class="dish-meta">
-            <span class="cooking-time">
-              <span class="icon">⏱</span>
-              <span id="dishTime"></span>
-              <span class="az-text">dəq</span>
-              <span class="ru-text" style="display:none;">мин</span>
-              <span class="en-text" style="display:none;">min</span>
-            </span>
-            <span class="price" id="dishPrice"></span>
-          </div>
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
 
-          <button class="btn-add-to-cart" id="addToCartBtn">
-            <span class="az-text">SƏBƏTƏ ƏLAVƏ ET</span>
-            <span class="ru-text" style="display:none;">ДОБАВИТЬ В КОРЗИНУ</span>
-            <span class="en-text" style="display:none;">ADD TO CART</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
+function closeDish(){
 
-  <script src="app.js"></script>
+    const modal =
+        document.getElementById(
+            "dishModal"
+        );
+
+    if(modal){
+
+        modal.remove();
+
+    }
+
+    document.body.style.overflow = "";
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function render(){
+
+    const app =
+        document.getElementById("app");
+
+
+    if(screen === "cover"){
+
+        app.innerHTML =
+            coverScreen();
+
+        return;
+
+    }
+
+
+    if(screen === "choice"){
+
+        app.innerHTML =
+            choiceScreen();
+
+        return;
+
+    }
+
+
+    if(screen === "menu"){
+
+        app.innerHTML =
+            menuScreen();
+
+        return;
+
+    }
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+render();
+
+</script>
+
 </body>
 </html>
